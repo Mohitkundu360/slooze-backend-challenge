@@ -1,0 +1,101 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type AuthResponse {
+  token: String!
+  user: UserType!
+}
+
+type CartItemType {
+  id: ID!
+  menuItem: MenuItemType!
+  quantity: Int!
+}
+
+type CartType {
+  id: ID!
+  items: [CartItemType!]!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type MenuItemType {
+  description: String!
+  id: ID!
+  name: String!
+  price: Float!
+  restaurantId: Float!
+}
+
+type Mutation {
+  addPaymentMethod(details: String!, isDefault: Boolean! = false, type: String!): PaymentMethodType!
+  addToCart(menuItemId: Float!, quantity: Float! = 1): CartType!
+  cancelOrder(orderId: Float!): OrderType!
+  checkoutOrder(orderId: Float!): OrderType!
+  clearCart: Boolean!
+  createOrder(restaurantId: Float!): OrderType!
+  deletePaymentMethod(id: Float!): Boolean!
+  login(email: String!, password: String!): AuthResponse!
+  register(country: String! = "INDIA", email: String!, name: String!, password: String!, role: String! = "MEMBER"): AuthResponse!
+  removeFromCart(cartItemId: Float!): CartType!
+  updatePaymentMethod(details: String, id: Float!, isDefault: Boolean, type: String): PaymentMethodType!
+}
+
+type OrderItemType {
+  id: ID!
+  menuItem: MenuItemType!
+  price: Float!
+  quantity: Int!
+}
+
+type OrderType {
+  country: String!
+  createdAt: DateTime!
+  id: ID!
+  items: [OrderItemType!]!
+  restaurant: RestaurantType!
+  status: String!
+  totalAmount: Float!
+  user: UserType!
+}
+
+type PaymentMethodType {
+  details: String!
+  id: ID!
+  isDefault: Boolean!
+  type: String!
+  userId: Float!
+}
+
+type Query {
+  allOrders(country: String): [OrderType!]!
+  allPaymentMethods: [PaymentMethodType!]!
+  me: UserType!
+  myCart: CartType
+  myOrders: [OrderType!]!
+  myPaymentMethods: [PaymentMethodType!]!
+  restaurant(id: Float!): RestaurantType
+  restaurants(country: String): [RestaurantType!]!
+  users: [UserType!]!
+}
+
+type RestaurantType {
+  country: String!
+  cuisine: String!
+  id: ID!
+  menuItems: [MenuItemType!]
+  name: String!
+}
+
+type UserType {
+  country: String!
+  createdAt: DateTime!
+  email: String!
+  id: ID!
+  name: String!
+  role: String!
+}
