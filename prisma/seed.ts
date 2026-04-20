@@ -8,6 +8,39 @@ async function main() {
   const managerPass = await bcrypt.hash('manager123', 10);
   const memberPass = await bcrypt.hash('member123', 10);
 
+  // ── Problem Statement Users ──────────────────────
+  await prisma.user.upsert({
+    where: { email: 'nickfury@slooze.com' },
+    update: {},
+    create: { email: 'nickfury@slooze.com', password: adminPass, name: 'Nick Fury', role: 'ADMIN', country: 'INDIA' },
+  });
+  await prisma.user.upsert({
+    where: { email: 'captainmarvel@slooze.com' },
+    update: {},
+    create: { email: 'captainmarvel@slooze.com', password: managerPass, name: 'Captain Marvel', role: 'MANAGER', country: 'INDIA' },
+  });
+  await prisma.user.upsert({
+    where: { email: 'captainamerica@slooze.com' },
+    update: {},
+    create: { email: 'captainamerica@slooze.com', password: managerPass, name: 'Captain America', role: 'MANAGER', country: 'AMERICA' },
+  });
+  await prisma.user.upsert({
+    where: { email: 'thanos@slooze.com' },
+    update: {},
+    create: { email: 'thanos@slooze.com', password: memberPass, name: 'Thanos', role: 'MEMBER', country: 'INDIA' },
+  });
+  await prisma.user.upsert({
+    where: { email: 'thor@slooze.com' },
+    update: {},
+    create: { email: 'thor@slooze.com', password: memberPass, name: 'Thor', role: 'MEMBER', country: 'INDIA' },
+  });
+  await prisma.user.upsert({
+    where: { email: 'travis@slooze.com' },
+    update: {},
+    create: { email: 'travis@slooze.com', password: memberPass, name: 'Travis', role: 'MEMBER', country: 'AMERICA' },
+  });
+
+  // ── Generic Test Users ───────────────────────────
   await prisma.user.upsert({
     where: { email: 'admin@slooze.com' },
     update: {},
@@ -29,6 +62,7 @@ async function main() {
     create: { email: 'admin.us@slooze.com', password: adminPass, name: 'US Admin', role: 'ADMIN', country: 'AMERICA' },
   });
 
+  // ── Indian Restaurants ───────────────────────────
   const r1 = await prisma.restaurant.findFirst({ where: { name: 'Spice Garden' } });
   if (!r1) {
     await prisma.restaurant.create({
@@ -62,6 +96,7 @@ async function main() {
     });
   }
 
+  // ── American Restaurants ─────────────────────────
   const r3 = await prisma.restaurant.findFirst({ where: { name: 'The Burger Joint' } });
   if (!r3) {
     await prisma.restaurant.create({
@@ -94,10 +129,19 @@ async function main() {
     });
   }
 
-  console.log('✅ Database seeded!');
-  console.log('Admin: admin@slooze.com / admin123');
-  console.log('Manager: manager@slooze.com / manager123');
-  console.log('Member: member@slooze.com / member123');
+  console.log('✅ Database seeded successfully!\n');
+  console.log('── Problem Statement Users ──');
+  console.log('Nick Fury (Admin):      nickfury@slooze.com / admin123');
+  console.log('Captain Marvel (Mgr):   captainmarvel@slooze.com / manager123');
+  console.log('Captain America (Mgr):  captainamerica@slooze.com / manager123');
+  console.log('Thanos (Member):        thanos@slooze.com / member123');
+  console.log('Thor (Member):          thor@slooze.com / member123');
+  console.log('Travis (Member):        travis@slooze.com / member123');
+  console.log('\n── Generic Test Users ──');
+  console.log('Admin (India):          admin@slooze.com / admin123');
+  console.log('Manager (India):        manager@slooze.com / manager123');
+  console.log('Member (India):         member@slooze.com / member123');
+  console.log('Admin (US):             admin.us@slooze.com / admin123');
 }
 
 main().catch(console.error).finally(() => prisma.$disconnect());
