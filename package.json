@@ -6,7 +6,7 @@
   "scripts": {
     "start": "npx ts-node src/main.ts",
     "start:dev": "npx ts-node src/main.ts",
-    "build": "npx ts-node src/main.ts",
+    "build": "npx prisma generate && npx prisma db push && npx ts-node prisma/seed.ts",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
     "seed": "npx ts-node prisma/seed.ts",
