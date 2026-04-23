@@ -2,6 +2,14 @@
 
 Role-based food ordering backend built with **NestJS + GraphQL + Prisma** for the Slooze take-home challenge.
 
+![Live](https://img.shields.io/badge/Live-Render-brightgreen)
+![NestJS](https://img.shields.io/badge/NestJS-v10-red)
+![GraphQL](https://img.shields.io/badge/GraphQL-Apollo-purple)
+![Prisma](https://img.shields.io/badge/ORM-Prisma-blue)
+
+🚀 **Live Demo:** https://slooze-backend-challenge.onrender.com/graphql
+
+🐙 **GitHub:** https://github.com/Mohitkundu360/slooze-backend-challenge
 ---
 
 ## 🚀 Quick Start
